@@ -3,13 +3,14 @@ const { sendResponse } = require("../utils/sendResponse");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const { redisClient } = require("../lib/redis");
 
 dotenv.config();
 
 const signupController = async (req, res) => {
-  const { name, email, password, Role } = req.body;
+  const { name, email, password, Role, otp } = req.body;
 
-  if (!name || !email || !password || !Role) {
+  if (!name || !email || !password || !Role || !otp) {
     return sendResponse(res, {
       status: 400,
       success: false,
@@ -18,6 +19,23 @@ const signupController = async (req, res) => {
   }
 
   try {
+    const storedOtp = await redisClient.get(email);
+    if (!storedOtp) {
+      return sendResponse(res, {
+        status: 400,
+        success: false,
+        message: "OTP expired or not found.",
+      });
+    }
+
+    if (storedOtp !== otp) {
+      return sendResponse(res, {
+        status: 401,
+        success: false,
+        message: "Invalid OTP.",
+      });
+    }
+
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -42,10 +60,12 @@ const signupController = async (req, res) => {
     });
 
     const token = jwt.sign(
-      { id: newUser.id, role: newUser.role },
+      { id: newUser.id, role: newUser.Role },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
+
+    await redisClient.del(email);
 
     return sendResponse(res, {
       status: 201,
@@ -54,7 +74,7 @@ const signupController = async (req, res) => {
       data: {
         email: newUser.email,
         token,
-        role: newUser.role,
+        role: newUser.Role,
         name: newUser.name,
       },
     });
