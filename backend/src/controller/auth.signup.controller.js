@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const { redisClient } = require("../lib/redis");
-
 dotenv.config();
 
 const signupController = async (req, res) => {
@@ -60,9 +59,11 @@ const signupController = async (req, res) => {
     });
 
     const token = jwt.sign(
-      { id: newUser.id, role: newUser.Role },
+      { id: newUser.id, role: newUser.Role, email: newUser.email },
       process.env.JWT_SECRET,
-      { expiresIn: "7d" }
+      {
+        expiresIn: "7d",
+      }
     );
 
     await redisClient.del(email);

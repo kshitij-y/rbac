@@ -3,7 +3,6 @@ const { sendResponse } = require("../utils/sendResponse");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-
 dotenv.config();
 
 const signinController = async (req, res) => {
@@ -39,7 +38,7 @@ const signinController = async (req, res) => {
             });
         }
 
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ id: user.id, role: user.Role, email: user.email }, process.env.JWT_SECRET, {
             expiresIn: "7d",
         });
 
