@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { Toaster } from "react-hot-toast";
 import './index.css'
 import App from './App.jsx'
+import Footer from './components/footer.jsx';
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -35,5 +36,6 @@ createRoot(document.getElementById("root")).render(
         duration: 2000,
       }}
     />
+    <Footer />
   </StrictMode>
 );

@@ -6,6 +6,9 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import CreateBlog from './pages/admin/createBlog';
 import Dashboard from './pages/admin/dashboard';
+import EditBlog from './pages/admin/editBlog';
+import BlogView from './pages/BlogView';
+
 
 function App() {
   return (
@@ -14,6 +17,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/auth/signin" element={<Signin />} />
         <Route path="/auth/signup" element={<Signup />} />
+        <Route path="/blog/:id" element={<BlogView />} />
         <Route
           path="/admin"
           element={
@@ -27,6 +31,14 @@ function App() {
           element={
             <ProtectedAdminRoute>
               <CreateBlog />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/editBlog/:id"
+          element={
+            <ProtectedAdminRoute>
+              <EditBlog />
             </ProtectedAdminRoute>
           }
         />

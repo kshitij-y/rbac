@@ -10,16 +10,14 @@ export default function useBlogs() {
   const [sortOrder, setSortOrder] = useState("newest");
 
   const [page, setPage] = useState(1);
-  const [limit] = useState(10);
+  const [limit] = useState(5);
   const [totalPages, setTotalPages] = useState(1);
 
   const fetchBlogs = async () => {
     setLoading(true);
     try {
       const base = searchTerm.trim()
-        ? `/api/blog/search?q=${encodeURIComponent(
-            searchTerm
-          )}&page=${page}&limit=${limit}`
+        ? `/api/blog/search?q=${encodeURIComponent(searchTerm)}&page=${page}&limit=${limit}`
         : `/api/blog/getAll?page=${page}&limit=${limit}`;
 
       const res = await fetcher(base, {

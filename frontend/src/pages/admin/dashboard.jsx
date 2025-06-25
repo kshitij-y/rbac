@@ -3,8 +3,9 @@ import TopBar from "../../components/TopBar";
 import BlogCard from "../../components/BlogCard";
 import useBlogs from "../../utils/useBlog";
 import SearchBar from "../../components/SearchBar";
-import Pagination from "../../components/pagination";
+import Pagination from "../../components/Pagination";
 import useAuth from "../../utils/useAuth";
+import fetcher from "../../utils/fetcher";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -22,10 +23,10 @@ export default function Dashboard() {
     setBlogs,
   } = useBlogs();
 
-  const{ isAdmin }= useAuth();
+  const { isAdmin } = useAuth();
 
   const handleEdit = (id) => {
-    navigate(`/admin/edit/${id}`);
+    navigate(`/admin/editBlog/${id}`);
   };
 
   const handleDelete = async (id) => {
@@ -44,29 +45,32 @@ export default function Dashboard() {
     }
   };
 
-
-
   return (
-    <>
-      <div className="w-full">
-        <TopBar />
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <TopBar />
 
-      <div className="max-w-3xl mx-auto px-4">
+      <div className="max-w-3xl mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-6 text-indigo-800 text-center">
+          Admin Dashboard 🛠️
+        </h1>
+
         <SearchBar
           searchTerm={searchTerm}
           onSearchChange={setSearchTerm}
           sortOrder={sortOrder}
           isAdmin={isAdmin}
           onSortChange={setSortOrder}
+          onCreate={() => navigate("/admin/createBlog")}
         />
 
         {loading ? (
-          <p className="text-center text-gray-500">Loading blogs...</p>
+          <p className="text-center text-indigo-600 animate-pulse">
+            Loading blogs...
+          </p>
         ) : error ? (
-          <p className="text-center text-red-600">{error}</p>
+          <p className="text-center text-red-600 font-medium">{error}</p>
         ) : blogs.length === 0 ? (
-          <p className="text-center text-gray-500">No blogs found.</p>
+          <p className="text-center text-gray-600 italic">No blogs found.</p>
         ) : (
           <div className="space-y-6 pb-10">
             {blogs.map((blog) => (
@@ -86,6 +90,6 @@ export default function Dashboard() {
           onPageChange={setPage}
         />
       </div>
-    </>
+    </div>
   );
 }

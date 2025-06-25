@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 
 const BlogCard = ({ blog, onEdit, onDelete }) => {
+  const navigate = useNavigate();
   const { id, title, content, createdAt } = blog;
 
   const formattedDate = new Date(createdAt).toLocaleDateString(undefined, {
@@ -9,9 +11,9 @@ const BlogCard = ({ blog, onEdit, onDelete }) => {
   });
 
   return (
-    <div className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-200 bg-white">
+    <div className="border rounded-lg p-4 shadow-sm hover:shadow-md hover:scale-102 transition-shadow duration-300 bg-white" onClick={() =>navigate(`/blog/${blog.id}`)}>
       <h2 className="text-xl font-semibold mb-2">{title}</h2>
-      <p className="whitespace-pre-wrap text-gray-700 mb-4 line-clamp-3">
+      <p className="whitespace-pre-wrap text-gray-700 mb-4 line-clamp-2">
         {content}
       </p>
       <div className="flex justify-between items-center text-sm text-gray-500 mb-2">
