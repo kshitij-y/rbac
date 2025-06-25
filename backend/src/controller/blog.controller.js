@@ -83,8 +83,11 @@ exports.getById = async (req, res) => {
 
 exports.searchBlog = async (req, res) => {
   const keyword = req.query.q;
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 5;
+  const skip = (page - 1) * limit;
 
-  if (!keyword || keyword.trim() == "") {
+  if (!keyword || keyword.trim() === "") {
     return sendResponse(res, {
       status: 400,
       success: false,
@@ -93,23 +96,39 @@ exports.searchBlog = async (req, res) => {
   }
 
   try {
-    const blogs = await prisma.blog.findMany({
-      where: {
-        OR: [
-          { title: { contains: keyword, mode: "insensitive" } },
-          { content: { contains: keyword, mode: "insensitive" } },
-        ],
-      },
-      orderBy: { createdAt: "desc" },
-    });
+    const whereCondition = {
+      OR: [
+        { title: { contains: keyword, mode: "insensitive" } },
+        { content: { contains: keyword, mode: "insensitive" } },
+      ],
+    };
+
+    const [blogs, total] = await Promise.all([
+      prisma.blog.findMany({
+        where: whereCondition,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.blog.count({ where: whereCondition }),
+    ]);
+
+    const totalPages = Math.ceil(total / limit);
 
     return sendResponse(res, {
       status: 200,
       success: true,
-      message: "",
-      data: blogs,
+      message: "Search results",
+      data: {
+        page,
+        limit,
+        total,
+        totalPages,
+        blogs,
+      },
     });
   } catch (error) {
+    console.error("Search error:", error);
     return sendResponse(res, {
       status: 500,
       success: false,
@@ -217,4 +236,3 @@ exports.updateBlog = async (req, res) => {
     });
   }
 };
-``

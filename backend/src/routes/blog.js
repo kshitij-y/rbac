@@ -16,7 +16,7 @@ const blogRouter = express.Router();
 
 blogRouter.get("/getAll", getAll);
 blogRouter.get("/search", searchBlog);
-blogRouter.get("/:id", getById); // this is dynamic route (always in last line)
+blogRouter.get("/:id", getById);
 
 blogRouter.post("/create", protect, restrictToRoles("ADMIN"), createBlog);
 blogRouter.delete("/delete/:id", protect, restrictToRoles("ADMIN"), deleteBlog);

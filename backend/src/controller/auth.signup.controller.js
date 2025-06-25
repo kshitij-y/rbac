@@ -8,7 +8,7 @@ dotenv.config();
 
 const signupController = async (req, res) => {
   const { name, email, password, Role, otp } = req.body;
-
+  console.log("req came");
   if (!name || !email || !password || !Role || !otp) {
     return sendResponse(res, {
       status: 400,
@@ -62,9 +62,17 @@ const signupController = async (req, res) => {
       { id: newUser.id, role: newUser.Role, email: newUser.email },
       process.env.JWT_SECRET,
       {
-        expiresIn: "7d",
+        expiresIn: "1d",
       }
     );
+
+    const isProd = process.env.NODE_ENV === "production";
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: isProd,
+      sameSite: isProd ? "none" : "strict",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
 
     await redisClient.del(email);
 
@@ -74,7 +82,6 @@ const signupController = async (req, res) => {
       message: "User created successfully.",
       data: {
         email: newUser.email,
-        token,
         role: newUser.Role,
         name: newUser.name,
       },
