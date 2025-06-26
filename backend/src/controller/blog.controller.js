@@ -14,6 +14,14 @@ exports.getAll = async (req, res) => {
         skip,
         take: limit,
         orderBy: { createdAt: "desc" },
+        include: {
+          author: {
+            select: {
+              id: true,
+              name: true,
+            }
+          }
+        }
       }),
       prisma.blog.count(),
     ]);
@@ -52,7 +60,7 @@ exports.getById = async (req, res) => {
       where: { id },
       include: {
         author: {
-          select: { id: true, name: true, email: true },
+          select: { id: true, name: true },
         },
       },
     });
@@ -109,6 +117,14 @@ exports.searchBlog = async (req, res) => {
         skip,
         take: limit,
         orderBy: { createdAt: "desc" },
+        include: {
+          author: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
       }),
       prisma.blog.count({ where: whereCondition }),
     ]);

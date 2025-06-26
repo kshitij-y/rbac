@@ -10,7 +10,9 @@ export default function TopBar() {
         onClick={() => {
           navigate("/");
         }}>
-        <span className="text-blue-700">write</span>Flow
+        <h2 className="text-2xl font-bold">
+          <span className="text-blue-700">write</span>Flow
+        </h2>
       </div>
       <div className="flex items-center space-x-4">
         {/* <ThemeToggle /> */}

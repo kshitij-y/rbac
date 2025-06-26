@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { UserCircle } from "lucide-react";
 
 const BlogCard = ({ blog, onEdit, onDelete }) => {
   const navigate = useNavigate();
-  const { id, title, content, createdAt } = blog;
+  const { id, title, content, createdAt, author } = blog;
 
   const formattedDate = new Date(createdAt).toLocaleDateString(undefined, {
     year: "numeric",
@@ -11,31 +12,39 @@ const BlogCard = ({ blog, onEdit, onDelete }) => {
   });
 
   return (
-    <div className="border rounded-lg p-4 shadow-sm hover:shadow-md hover:scale-102 transition-shadow duration-300 bg-white">
+    <div className="rounded-2xl border p-5 bg-white shadow-md hover:shadow-xl hover:scale-103 transition-all duration-300">
+      {/* Header - Author Info */}
+      <div className="flex items-center gap-3 mb-4">
+        <UserCircle className="text-gray-600" size={32} />
+        <div>
+          <p className="font-medium text-gray-900">{author?.name}</p>
+          <p className="text-xs text-gray-500">{formattedDate}</p>
+        </div>
+      </div>
+
       <h2
-        className="text-xl font-semibold mb-2"
-        onClick={() => navigate(`/blog/${blog.id}`)}>
+        onClick={() => navigate(`/blog/${blog.id}`)}
+        className="text-lg font-semibold text-blue-700 mb-2 cursor-pointer hover:underline">
         {title}
       </h2>
+
       <p
-        className="whitespace-pre-wrap text-gray-700 mb-4 line-clamp-2"
-        onClick={() => navigate(`/blog/${blog.id}`)}>
+        onClick={() => navigate(`/blog/${blog.id}`)}
+        className="text-gray-700 text-sm whitespace-pre-wrap line-clamp-2 cursor-pointer mb-4">
         {content}
       </p>
-      <div className="flex justify-between items-center text-sm text-gray-500 mb-2">
-        <span>Created on: {formattedDate}</span>
-        <div className="flex gap-2">
-          <button
-            onClick={() => onEdit(id)}
-            className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
-            Edit
-          </button>
-          <button
-            onClick={() => onDelete(id)}
-            className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition-colors">
-            Delete
-          </button>
-        </div>
+
+      <div className="flex justify-end gap-2 mt-2">
+        <button
+          onClick={() => onEdit(id)}
+          className="px-4 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-all">
+          Edit
+        </button>
+        <button
+          onClick={() => onDelete(id)}
+          className="px-4 py-1 border border-red-600 text-red-600 rounded-lg hover:bg-red-50 transition-all">
+          Delete
+        </button>
       </div>
     </div>
   );
