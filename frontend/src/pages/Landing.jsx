@@ -21,7 +21,7 @@ export default function Landing() {
 
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+    <div className="flex flex-col min-h-screen bg-white">
       <TopBar />
 
       <div className="max-w-3xl w-full mx-auto px-4 py-8">

@@ -42,12 +42,12 @@ const signinController = async (req, res) => {
       { expiresIn: "1d" }
     );
 
-    const isProd = process.env.NODE_ENV === "production"
+    const isProd = process.env.NODE_ENV === "production";
     res.cookie("token", token, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
       secure: isProd,
-      sameSite: isProd ? 'lax' : 'strict',
+      sameSite: isProd ? "None" : "strict",
     });
 
     return sendResponse(res, {

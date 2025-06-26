@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function TopBar() {
   const navigate = useNavigate();
   return (
-    <div className="flex items-center justify-between p-4 w-full">
+    <div className="flex items-center justify-between p-4 w-full border-b border-gray-200 bg-white shadow-md">
       <div
         className="text-lg font-bold text-gray-800 cursor-pointer"
         onClick={() => {

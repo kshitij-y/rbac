@@ -70,7 +70,7 @@ const signupController = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: isProd,
-      sameSite: isProd ? "none" : "strict",
+      sameSite: isProd ? "None" : "strict",
       maxAge: 24 * 60 * 60 * 1000,
     });
 
