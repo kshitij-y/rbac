@@ -59,7 +59,7 @@ const signupController = async (req, res) => {
     });
 
     const token = jwt.sign(
-      { id: newUser.id, role: newUser.Role, email: newUser.email },
+      { id: newUser.id,name: user.name, role: newUser.Role, email: newUser.email },
       process.env.JWT_SECRET,
       {
         expiresIn: "1d",

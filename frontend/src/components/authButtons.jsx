@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../utils/useAuth";
 import fetcher from "../utils/fetcher";
 import toast from "react-hot-toast";
+import { User } from "lucide-react";
+
 const AuthButtons = () => {
   const navigate = useNavigate();
   const {loggedIn, isAdmin} = useAuth();
@@ -15,7 +17,7 @@ const AuthButtons = () => {
       if (res.success) {
         toast.success("Signed out successfully!");
       }
-      navigate(0);
+      navigate("/");
     } catch (err) {
       console.error("Sign out error:", err);
     }
@@ -41,7 +43,7 @@ const AuthButtons = () => {
             <div
               className="flex items-center gap-2 px-4 py-1.5 rounded-lg shadow hover:bg-green-100 transition-all duration-200 cursor-pointer"
               onClick={goToAdmin}>
-              <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
+              <span className="w-2.5 h-2.5 rounded-full bg-green-600 animate-pulse" />
               <span className="text-sm font-medium text-black">admin</span>
             </div>
           )}
@@ -49,6 +51,11 @@ const AuthButtons = () => {
             onClick={handleSignOut}
             className="px-4 py-1.5 text-sm font-medium text-white bg-black rounded-lg shadow hover:bg-gray-900 transition-all duration-200">
             Sign Out
+          </button>
+          <button
+            onClick={() => navigate("/profile")}
+            className="px-4 py-1 text-sm font-medium text-black rounded-lg shadow hover:bg-green-100 transition-all duration-200">
+              <User />
           </button>
         </>
       ) : (

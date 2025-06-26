@@ -11,9 +11,15 @@ const BlogCard = ({ blog, onEdit, onDelete }) => {
   });
 
   return (
-    <div className="border rounded-lg p-4 shadow-sm hover:shadow-md hover:scale-102 transition-shadow duration-300 bg-white" onClick={() =>navigate(`/blog/${blog.id}`)}>
-      <h2 className="text-xl font-semibold mb-2">{title}</h2>
-      <p className="whitespace-pre-wrap text-gray-700 mb-4 line-clamp-2">
+    <div className="border rounded-lg p-4 shadow-sm hover:shadow-md hover:scale-102 transition-shadow duration-300 bg-white">
+      <h2
+        className="text-xl font-semibold mb-2"
+        onClick={() => navigate(`/blog/${blog.id}`)}>
+        {title}
+      </h2>
+      <p
+        className="whitespace-pre-wrap text-gray-700 mb-4 line-clamp-2"
+        onClick={() => navigate(`/blog/${blog.id}`)}>
         {content}
       </p>
       <div className="flex justify-between items-center text-sm text-gray-500 mb-2">

@@ -26,6 +26,7 @@ const getMe = (req, res) => {
       message: "Authenticated",
       data: {
         id: decoded.id,
+        name: decoded.name,
         email: decoded.email,
         role: decoded.role,
       },

@@ -8,6 +8,7 @@ import CreateBlog from './pages/admin/createBlog';
 import Dashboard from './pages/admin/dashboard';
 import EditBlog from './pages/admin/editBlog';
 import BlogView from './pages/BlogView';
+import Profile from './pages/Profile';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/auth/signin" element={<Signin />} />
         <Route path="/auth/signup" element={<Signup />} />
+        <Route path="/profile" element={<Profile/>} />
         <Route path="/blog/:id" element={<BlogView />} />
         <Route
           path="/admin"
