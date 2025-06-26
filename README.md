@@ -1,6 +1,13 @@
 
-# Role-Based Blogging Platform
 
+# Role-Based Blogging Platform
+👉 [https://write-flow.netlify.app/](https://write-flow.netlify.app)
+> ⚠️ Please wait a few seconds after opening — the backend and frontend may experience a cold start delay.
+
+## Admin Credentials
+
+- **Email:** `kshitijyadav2003@gmail.com`  
+- **Password:** `123456`
 ## Description
 
 A blogging platform with Role-Based Access Control (RBAC) where:
@@ -35,7 +42,32 @@ Secure authentication with JWT ensures proper access control. The platform featu
     
 -   **Email:** Nodemailer (for OTP/email verification)
         
-
+## Folder Structure
+```
+rbac/
+├─ backend/
+│  ├─ prisma/
+│  ├─ src/
+│  │  ├─ controller/
+│  │  ├─ lib/
+│  │  ├─ middleware/
+│  │  ├─ routes/
+│  │  ├─ utils/
+|
+├─ frontend/
+│  ├─ public/
+│  ├─ src/
+│  │  ├─ assets/
+│  │  ├─ components/
+│  │  ├─ pages/
+│  │  │  ├─ admin/
+│  │  ├─ utils/
+│  │  ├─ App.jsx
+│  │  ├─ index.css
+│  │  └─ main.jsx
+│  ├─ .env
+└─ README.md
+```
 ## Setup & Installation
 
 ### Steps
