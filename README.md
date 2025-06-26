@@ -58,7 +58,7 @@ Secure authentication with JWT ensures proper access control. The platform featu
     JWT_SECRET=your_jwt_secret
     SMTP_USER=your_email@example.com
     SMTP_PASS=your_email_password
-    REDIS_URL=your_redis_url (optional)
+    REDIS_URL=your_redis_url
     feurl="http://localhost:5173"
     ```
     
@@ -68,7 +68,18 @@ Secure authentication with JWT ensures proper access control. The platform featu
 	 npx prisma generate
 	 npm run dev
 	```
-6.  Start frontend server :
-    `npm run dev` 
+5.  Frontend :
+	 ```
+	 cd frontend
+	 npm install
+	```
+6. Configure environment variables (`.env`):
+    ```
+    VITE_API_URL="http://localhost:3000"
+    ```
+7. Start frontend server:
+	```
+	npm run dev
+	```
     
-7.  Open [http://localhost:5173](http://localhost:5173)
+9.  Open [http://localhost:5173](http://localhost:5173)
