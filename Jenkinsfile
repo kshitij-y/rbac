@@ -9,6 +9,15 @@ pipeline {
       }
     }
 
+    stage('Inject env files') {
+      steps {
+        sh '''
+          cp /home/ubuntu/rbac/frontend/.env frontend/.env
+          cp /home/ubuntu/rbac/backend/.env backend/.env
+        '''
+      }
+    }
+
     stage('Docker Compose Up') {
       steps {
         sh '''
