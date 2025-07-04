@@ -3,6 +3,7 @@ const authRouter = require("./routes/auth");
 const blogRouter = require("./routes/blog");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const { sendResponse } = require("./utils/sendResponse");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,6 +19,14 @@ app.use(
 
 app.use(express.json());
 app.use(cookieParser());
+
+app.get("/health", async (req, res) => {
+  return sendResponse(res, {
+    status: 200,
+    success: true,
+    message: "Backend is up and running",
+  });
+});
 
 app.use("/api/auth", authRouter);
 app.use("/api/blog", blogRouter);
