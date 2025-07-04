@@ -48,21 +48,16 @@ export default function Landing() {
         ) : (
           <div className="space-y-4 mt-4">
             {blogs.map((blog) => (
-              <UserBlogCard
-                key={blog.id}
-                blog={blog}
-              />
+              <UserBlogCard key={blog.id} blog={blog} />
             ))}
           </div>
         )}
 
-        {blogs.length > 0 && (
-          <Pagination
-            currentPage={page}
-            totalPages={totalPages}
-            onPageChange={setPage}
-          />
-        )}
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
       </div>
     </div>
   );
