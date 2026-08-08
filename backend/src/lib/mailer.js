@@ -31,6 +31,6 @@ const sendEmail = async (to, otp) => {
   }
 };
 
-// module.exports = { sendEmail };
+module.exports = { sendEmail };
 
-sendEmail("kshitijyadav620@gmail.com", "123456");
+// sendEmail("kshitijyadav620@gmail.com", "123456");
