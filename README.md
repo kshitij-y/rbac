@@ -1,7 +1,7 @@
 
 
 # Role-Based Blogging Platform
-👉 [https://write-flow.netlify.app/](https://write-flow.netlify.app)
+
 > ⚠️ Please wait a few seconds after opening — the backend and frontend may experience a cold start delay.
 
 ## Admin Credentials
